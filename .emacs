@@ -71,8 +71,6 @@
 
 (setq-default indent-tabs-mode nil)
 
-
-
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 
 (setq color-theme-load-all-themes nil)
