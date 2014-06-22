@@ -20,7 +20,8 @@
                              ;; Cada vez que se pulsa ENTER se indenta y luego se salta de línea.
 			     (local-set-key (kbd "RET") 'newline-and-indent)))
 
-;; (add-hook 'find-file-hook (lambda () (flymake-find-file-hook 1)))
+(add-hook 'shell-mode-hook '(lambda ()
+                              (visual-line-mode t)))
 
 (let ((default-directory "~/.emacs.d/elpa/"))
   (normal-top-level-add-subdirs-to-load-path))
@@ -123,6 +124,7 @@
 (load-theme 'tango-dark t)
 (put 'upcase-region 'disabled nil)
 (remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
+(setq desktop-restore-frames nil)
 (desktop-save-mode 1)
 
 (global-set-key "\C-w" 'backward-kill-word) ;; Backspace => C-w
