@@ -82,6 +82,13 @@
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-c.." 'org-time-stamp)
 (global-font-lock-mode 1)
+(setq org-directory "~/ownCloud/org")
+(setq org-agenda-files (quote ("~/ownCloud/org/todo.org")))
+
+
+;; MobileOrg
+(setq org-mobile-directory "~/ownCloud/MobileOrg")
+(setq org-mobile-inbox-for-pull (concat org-directory "/index.org"))
 
 ;; Evitar la aparición de eventos ya hechos (DONE).
 (setq org-agenda-todo-ignore-scheduled (quote future))
@@ -96,18 +103,21 @@
  '(custom-safe-themes
    (quote
     ("f32dd8e7b3a508874eded03d5be43d2bdfffe81c199eea72de06ce3e653db720" default)))
+ '(package-selected-packages
+   (quote
+    (magit async auto-highlight-symbol dash elisp-slime-nav epl eproject erlang f find-file-in-project gh git-commit helm helm-core idle-highlight-mode ido-completing-read+ ido-ubiquitous json-reformat json-snatcher logito magit-popup paredit pcache pkg-info popup pos-tip s smex with-editor clang-format edts flycheck-clangcheck flycheck-google-cpplint flycheck-pyflakes flylisp flymake-cppcheck flymake-google-cpplint flymake-jslint flymake-json flymake-python-pyflakes flymake-shell flyparens google-c-style json-mode latex-pretty-symbols latex-preview-pane ac-c-headers ac-clang ac-dabbrev ac-etags ac-slime auctex auto-complete-auctex auto-complete-c-headers auto-complete-clang auto-complete-clang-async auto-complete-exuberant-ctags magit-annex magit-filenotify magit-find-file magit-gerrit magit-gh-pulls magit-gitflow magit-tramp nyan-mode slime starter-kit-bindings starter-kit-js starter-kit-lisp)))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 (put 'dired-find-alternate-file 'disabled nil)
 
-(defun toggle-fullscreen ()
-  (interactive)
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                          '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
-  (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
-                          '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
-)
-(toggle-fullscreen)
+;; (defun toggle-fullscreen ()
+;;   (interactive)
+;;   (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+;;                           '(2 "_NET_WM_STATE_MAXIMIZED_VERT" 0))
+;;   (x-send-client-message nil 0 nil "_NET_WM_STATE" 32
+;;                           '(2 "_NET_WM_STATE_MAXIMIZED_HORZ" 0))
+;; )
+;; (toggle-fullscreen)
 
 (when (>= emacs-major-version 24)
   (require 'package)
@@ -119,7 +129,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 113 :width normal)))))
+ '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 100 :width normal)))))
 
 (load-theme 'tango-dark t)
 (put 'upcase-region 'disabled nil)
@@ -142,10 +152,10 @@
 
 (global-set-key "\M-_" 'pop-tag-mark)
 
-(require 'sublimity)
-(require 'sublimity-scroll)
+;; (require 'sublimity)
+;; (require 'sublimity-scroll)
 
-(require 'sublimity-map)
+;; (require 'sublimity-map)
 
 (eval-after-load 'flycheck
   '(progn
@@ -159,3 +169,23 @@
 (setq-default clang-format-style "Google")
 
 (require 'iso-transl)
+
+(add-to-list 'auto-mode-alist '("\\.jets\\'" . json-mode))
+
+;; (set-face-attribute 'default nil :height 120)
+
+(nyan-mode)
+
+(setq inferior-lisp-program "/usr/bin/sbcl")
+(require 'slime)
+(slime-setup '(slime-fancy))
+
+(require 'auto-complete-config)
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+(ac-config-default)
+
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq TeX-save-query nil)
+;(setq TeX-PDF-mode t)
+
