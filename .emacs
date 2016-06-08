@@ -97,6 +97,14 @@
 
 ;; Evitar la aparición de eventos ya hechos (DONE).
 (setq org-agenda-todo-ignore-scheduled (quote future))
+(setq org-directory "~/ownCloud/org")
+(setq org-agenda-files (concat org-directory "/todo.org"))
+
+;; MobileOrg
+(setq org-mobile-files org-agenda-files)
+(setq org-mobile-directory "~/ownCloud/MobileOrg")
+(setq org-mobile-inbox-for-pull (concat org-directory "/todo.org"))
+
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -110,36 +118,15 @@
     ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "c2ffe309e80032963afa9cf462bb119503bebd40f8df831ccdb2de13813f48e7" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "f32dd8e7b3a508874eded03d5be43d2bdfffe81c199eea72de06ce3e653db720" default)))
  '(package-selected-packages
    (quote
-    (java-imports java-snippets javadoc-lookup jdee jedi jedi-direx
-                  jtags anti-zenburn-theme color-theme-sanityinc-solarized
-                  color-theme-sanityinc-tomorrow lenlen-theme
-                  solarized-theme zenburn-theme ess ess-R-data-view
-                  ess-R-object-popup ess-smart-equals
-                  ess-smart-underscore markdown-mode markdown-mode+
-                  markdown-toc magit async auto-highlight-symbol dash
-                  elisp-slime-nav epl eproject erlang f
-                  find-file-in-project gh git-commit helm helm-core
-                  idle-highlight-mode ido-completing-read+
-                  ido-ubiquitous json-reformat json-snatcher
-                  logito magit-popup paredit pcache pkg-info
-                  popup pos-tip s smex with-editor clang-format
-                  edts flycheck-clangcheck flycheck-google-cpplint
-                  flycheck-pyflakes flylisp flymake-cppcheck
-                  flymake-google-cpplint flymake-jslint flymake-json
-                  flymake-python-pyflakes flymake-shell flyparens
-                  google-c-style json-mode latex-pretty-symbols
-                  latex-preview-pane ac-c-headers ac-clang ac-dabbrev
-                  ac-etags ac-slime auctex auto-complete-auctex
-                  auto-complete-c-headers auto-complete-clang
-                  auto-complete-clang-async
-                  auto-complete-exuberant-ctags magit-annex
-                  magit-filenotify magit-find-file magit-gerrit
-                  magit-gh-pulls magit-gitflow magit-tramp nyan-mode
-                  slime starter-kit-bindings starter-kit-js
-                  starter-kit-lisp)))
+    (auctex zenburn-theme zen-and-art-theme yasnippet websocket tangotango-theme sublimity starter-kit-ruby starter-kit-lisp starter-kit-bindings slime markdown-mode+ magit-annex json-mode guru-mode google-c-style flymake-shell flymake-python-pyflakes flycheck edts cyberpunk-theme color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clang-format cherry-blossom-theme auto-complete-clang-async auto-complete-clang auto-complete-c-headers anti-zenburn-theme)))
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 (put 'dired-find-alternate-file 'disabled nil)
+
+(when (>= emacs-major-version 24)
+  (require 'package)
+  (package-initialize)
+  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -151,14 +138,14 @@
 (load-theme 'tango-dark t)
 (put 'upcase-region 'disabled nil)
 (remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
-(setq desktop-restore-frames nil)
+
 
 (global-set-key "\C-w" 'backward-kill-word) ;; Backspace => C-w
 (global-set-key "\C-x\C-k" 'kill-region) ;; Kill-Region(C-w) => C-x C-k
 (global-set-key "\C-cx" 'smex)
 (global-set-key [f6] '(lambda ()
                         (interactive)
-                        (let ((mtg_path "$HOME/projects/mtg"))
+                        (let ((mtg_path "$HOME/projects/mtg")) ;
                           (shell-command
                            (format (concat "find "
                                            mtg_path
