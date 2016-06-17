@@ -111,16 +111,9 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(column-number-mode t)
- '(custom-enabled-themes nil)
- '(custom-safe-themes
-   (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "1b8d67b43ff1723960eb5e0cba512a2c7a2ad544ddb2533a90101fd1852b426e" "c2ffe309e80032963afa9cf462bb119503bebd40f8df831ccdb2de13813f48e7" "4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" "f32dd8e7b3a508874eded03d5be43d2bdfffe81c199eea72de06ce3e653db720" default)))
  '(package-selected-packages
    (quote
-    (auctex zenburn-theme zen-and-art-theme yasnippet websocket tangotango-theme sublimity starter-kit-ruby starter-kit-lisp starter-kit-bindings slime markdown-mode+ magit-annex json-mode guru-mode google-c-style flymake-shell flymake-python-pyflakes flycheck edts cyberpunk-theme color-theme-solarized color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clang-format cherry-blossom-theme auto-complete-clang-async auto-complete-clang auto-complete-c-headers anti-zenburn-theme)))
- '(show-paren-mode t)
- '(tool-bar-mode nil))
+    (starter-kit starter-kit-bindings starter-kit-js starter-kit-lisp find-file-in-project find-file-in-repository find-things-fast ido-at-point ido-clever-match ido-complete-space-or-hyphen ido-completing-read+ ido-describe-bindings ido-exit-target ido-gnus ido-grid-mode ido-hacks ido-load-library ido-migemo ido-occasional ido-occur ido-select-window ido-skk ido-sort-mtime ido-springboard ido-ubiquitous ido-vertical-mode ido-yes-or-no idomenu paredit scpaste smex auctex auto-complete auto-complete-auctex auto-complete-c-headers auto-complete-chunk auto-complete-clang auto-complete-clang-async auto-complete-exuberant-ctags google-c-style magit nyan-mode slime))))
 (put 'dired-find-alternate-file 'disabled nil)
 
 (when (>= emacs-major-version 24)
@@ -133,7 +126,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans Mono" :foundry "unknown" :slant normal :weight normal :height 100 :width normal)))))
+ )
 
 (load-theme 'tango-dark t)
 (put 'upcase-region 'disabled nil)
@@ -201,3 +194,7 @@
           calendar-month-name-array ["Enero" "Febrero" "Marzo" "Abril" "Mayo"
                                      "Junio" "Julio" "Agosto" "Septiembre"
                                      "Octubre" "Noviembre" "Diciembre"])
+
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
+
+(set-face-attribute 'default nil :height 150)
