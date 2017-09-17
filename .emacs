@@ -1,7 +1,11 @@
+;(setq server-use-tcp t)
+
 (when (>= emacs-major-version 24)
   (require 'package)
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
+
+(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
 
 ;;Don't use default.el file.
 (setq-default inhibit-default-init t)
@@ -22,7 +26,8 @@
 (show-paren-mode 1)
 
 (add-hook 'lisp-mode-hook '(lambda ()
-                             ;; Cada vez que se pulsa ENTER se indenta y luego se salta de línea.
+                             ;; Cada vez que se pulsa ENTER se indenta
+                             ;; y luego se salta de línea.
 			     (local-set-key (kbd "RET") 'newline-and-indent)))
 
 (add-hook 'shell-mode-hook '(lambda ()
@@ -31,16 +36,20 @@
 (let ((default-directory "~/.emacs.d/elpa/"))
   (normal-top-level-add-subdirs-to-load-path))
 
-(require 'google-c-style)
-(add-hook 'c-mode-common-hook 'google-set-c-style)
+;; (require 'google-c-style)
+;; (add-hook 'c-mode-common-hook 'google-set-c-style)
 
 (add-hook 'c-mode-common-hook '(lambda ()
-                                 ;; Cada vez que se pulsa ENTER se indenta y luego se salta de línea.
+                                 ;; Cada vez que se pulsa ENTER se
+                                 ;; indenta y luego se salta de línea.
                                  (local-set-key (kbd "RET") 'newline-and-indent)
-                                 ;; Hacer que variasPalabrasQueEsténJuntasDeEstaManera, sean
-                                 ;; consideradas varias para el editor en modo C/C++.
+                                 ;; Hacer que
+                                 ;; variasPalabrasQueEsténJuntasDeEstaManera,
+                                 ;; sean consideradas varias para el
+                                 ;; editor en modo C/C++.
                                  (subword-mode t)
-                                 ;; Realiza alguna acción con ciertos caracteres, como el ";".
+                                 ;; Realiza alguna acción con ciertos
+                                 ;; caracteres, como el ";".
                                  (c-toggle-electric-state t)
                                  ;; Borrar una cadena de espacios con un solo DELETE o BACKDELETE
                                  (c-toggle-auto-hungry-state t)))
@@ -69,6 +78,8 @@
 (setq highlight-trailing-whitespace t)
 
 (tool-bar-mode 0)
+(menu-bar-mode 0)
+(scroll-bar-mode 0)
 
 ;; Ido Mode settings.
 (require 'ido)
@@ -86,82 +97,36 @@
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
 (global-set-key "\C-c.." 'org-time-stamp)
+(setq org-log-done t)
 (global-font-lock-mode 1)
 (setq org-directory "~/ownCloud/org")
-(setq org-agenda-files (quote ("~/ownCloud/org/todo.org")))
+(setq org-agenda-files (list "~/ownCloud/org/tfm.org"
+                             "~/ownCloud/org/todo.org"))
 
 
 ;; MobileOrg
-(setq org-mobile-directory "~/ownCloud/MobileOrg")
-(setq org-mobile-inbox-for-pull (concat org-directory "/index.org"))
+;; (setq org-mobile-directory "~/ownCloud/MobileOrg")
+;; (setq org-mobile-inbox-for-pull (concat org-directory "/index.org"))
 
-;; Evitar la aparición de eventos ya hechos (DONE).
+;; Evitar que los eventos finalizados (DONE) sean mostrados .
 (setq org-agenda-todo-ignore-scheduled (quote future))
-(setq org-directory "~/ownCloud/org")
-(setq org-agenda-files (concat org-directory "/todo.org"))
+;; (setq org-directory "~/ownCloud/org")
+;; (setq org-agenda-files (concat org-directory "/todo.org"))
 
 ;; MobileOrg
-(setq org-mobile-files org-agenda-files)
-(setq org-mobile-directory "~/ownCloud/MobileOrg")
-(setq org-mobile-inbox-for-pull (concat org-directory "/todo.org"))
+;; (setq org-mobile-files org-agenda-files)
+;; (setq org-mobile-directory "~/ownCloud/MobileOrg")
+;; (setq org-mobile-inbox-for-pull (concat org-directory "/todo.org"))
 
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(ansi-color-faces-vector
-   [default bold shadow italic underline bold bold-italic bold])
- '(ansi-color-names-vector
-   (vector "#839496" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#002b36"))
- '(custom-safe-themes
-   (quote
-    ("4cf3221feff536e2b3385209e9b9dc4c2e0818a69a1cdb4b522756bcdf4e00a4" "4aee8551b53a43a883cb0b7f3255d6859d766b6c5e14bcb01bed572fcbef4328" default)))
- '(fci-rule-color "#073642")
- '(package-selected-packages
-   (quote
-    (color-theme-sanityinc-solarized ess ess-R-data-view ess-R-object-popup ess-smart-equals ess-smart-underscore ess-view ipython ein ein-mumamo starter-kit starter-kit-bindings starter-kit-js starter-kit-lisp find-file-in-project find-file-in-repository find-things-fast ido-at-point ido-clever-match ido-complete-space-or-hyphen ido-completing-read+ ido-describe-bindings ido-exit-target ido-gnus ido-grid-mode ido-hacks ido-load-library ido-migemo ido-occasional ido-occur ido-select-window ido-skk ido-sort-mtime ido-springboard ido-ubiquitous ido-vertical-mode ido-yes-or-no idomenu paredit scpaste smex auctex auto-complete auto-complete-auctex auto-complete-c-headers auto-complete-chunk auto-complete-clang auto-complete-clang-async auto-complete-exuberant-ctags google-c-style magit nyan-mode slime)))
- '(vc-annotate-background nil)
- '(vc-annotate-color-map
-   (quote
-    ((20 . "#dc322f")
-     (40 . "#cb4b16")
-     (60 . "#b58900")
-     (80 . "#859900")
-     (100 . "#2aa198")
-     (120 . "#268bd2")
-     (140 . "#d33682")
-     (160 . "#6c71c4")
-     (180 . "#dc322f")
-     (200 . "#cb4b16")
-     (220 . "#b58900")
-     (240 . "#859900")
-     (260 . "#2aa198")
-     (280 . "#268bd2")
-     (300 . "#d33682")
-     (320 . "#6c71c4")
-     (340 . "#dc322f")
-     (360 . "#cb4b16"))))
- '(vc-annotate-very-old-color nil))
 (put 'dired-find-alternate-file 'disabled nil)
-
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t))
-
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
 
 (load-theme 'sanityinc-solarized-dark t)
 (put 'upcase-region 'disabled nil)
 (remove-hook 'prog-mode-hook 'esk-turn-on-hl-line-mode)
 
+(global-set-key (kbd "C-x m") 'term)
+;; Start a new term even if one is active.
+(global-set-key (kbd "C-x M") (lambda () (interactive) (term t)))
 (global-set-key "\M-%" 'query-replace-regexp)
 (global-set-key "\C-w" 'backward-kill-word) ;; Backspace => C-w
 (global-set-key "\C-x\C-k" 'kill-region) ;; Kill-Region(C-w) => C-x C-k
@@ -193,17 +158,16 @@
 
 (add-to-list 'auto-mode-alist '("\\.jets\\'" . json-mode))
 
-;; (set-face-attribute 'default nil :height 120)
-
 (nyan-mode)
 
 (setq inferior-lisp-program "/usr/bin/sbcl")
 (require 'slime)
-(slime-setup '(slime-fancy))
+;; (slime-setup '(slime-fancy))
+(slime-setup '(slime))
 
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
-(ac-config-default)
+;; (require 'auto-complete-config)
+;; (add-to-list 'ac-dictionary-directories "~/.emacs.d/ac-dict")
+;; (ac-config-default)
 
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
@@ -225,8 +189,60 @@
                                      "Junio" "Julio" "Agosto" "Septiembre"
                                      "Octubre" "Noviembre" "Diciembre"])
 
-(add-to-list 'package-archives '("marmalade" . "https://marmalade-repo.org/packages/"))
+
+
+(setq case-replace t)
+(setq case-fold-search t)
+
+(setq python-shell-interpreter "/home/zaka/anaconda2/envs/py34/bin/python")
+
+;; (setq python-shell-interpreter "~/anaconda2/envs/py27/bin/python")
+
+;; (setq python-shell-interpreter "~/anaconda2/envs/py27/bin/python")
+
+; For Anaconda machine
+; (setq python-shell-interpreter "~/anaconda3/envs/py35/bin/python")
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-color-names-vector
+   (vector "#839496" "#dc322f" "#859900" "#b58900" "#268bd2" "#d33682" "#2aa198" "#eee8d5"))
+ '(fci-rule-color "#073642")
+ '(package-selected-packages
+   (quote
+    (ein ein-mumamo auto-complete-auctex company-auctex auctex company-math math-symbol-lists starter-kit starter-kit-bindings starter-kit-eshell starter-kit-js starter-kit-lisp smex slime nyan-mode magit color-theme-sanityinc-solarized)))
+ '(vc-annotate-background nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#dc322f")
+     (40 . "#cb4b16")
+     (60 . "#b58900")
+     (80 . "#859900")
+     (100 . "#2aa198")
+     (120 . "#268bd2")
+     (140 . "#d33682")
+     (160 . "#6c71c4")
+     (180 . "#dc322f")
+     (200 . "#cb4b16")
+     (220 . "#b58900")
+     (240 . "#859900")
+     (260 . "#2aa198")
+     (280 . "#268bd2")
+     (300 . "#d33682")
+     (320 . "#6c71c4")
+     (340 . "#dc322f")
+     (360 . "#cb4b16"))))
+ '(vc-annotate-very-old-color nil))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 (set-face-attribute 'default nil :height 150)
-
-(load-file "~/.emacs.d/plugins/netlogo-mode.el")
